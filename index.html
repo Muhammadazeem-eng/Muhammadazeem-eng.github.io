@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Azeem | AI Engineer & ML Researcher</title>
+    <meta name="description"
+        content="AI Engineer with 4+ years of experience building production-grade ML systems across healthcare, HR automation, and enterprise AI. 15+ end-to-end projects spanning LLM fine-tuning, RAG pipelines, computer vision, and multi-agent orchestration.">
+    <meta name="author" content="Muhammad Azeem">
+    <meta name="keywords"
+        content="AI Engineer, Machine Learning, Deep Learning, LLM, RAG, Computer Vision, Python, PyTorch, TensorFlow, LangChain, CyberGen">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Muhammad Azeem | AI Engineer & ML Researcher">
+    <meta property="og:description"
+        content="AI Engineer with 4+ years of experience building production-grade ML systems across healthcare, HR automation, and enterprise AI.">
+    <meta property="og:url" content="https://muhammadazeem-eng.github.io/">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo">
+                <span class="logo-bracket">&lt;</span>MA<span class="logo-bracket">/&gt;</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#certifications" class="nav-link">Certifications</a></li>
+                <li><a href="#publications" class="nav-link">Publications</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero" id="hero">
+        <canvas class="wave-bg" id="waveBg"></canvas>
+        <div class="hero-bg-effects">
+            <div class="hero-glow hero-glow-1"></div>
+            <div class="hero-glow hero-glow-2"></div>
+        </div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="badge-dot"></span>
+                    Available for opportunities
+                </div>
+                <h1 class="hero-name">
+                    Muhammad<br><span class="hero-name-accent">Azeem</span>
+                </h1>
+                <div class="hero-typewriter">
+                    <span class="typewriter-prefix">I'm a </span>
+                    <span class="typewriter-text" id="typewriterText"></span>
+                    <span class="typewriter-cursor">|</span>
+                </div>
+                <p class="hero-description">
+                    Building production-grade ML systems across healthcare, HR automation, and enterprise AI — from LLM
+                    fine-tuning and RAG pipelines to computer vision and multi-agent orchestration.
+                </p>
+                <div class="hero-cta">
+                    <a href="#contact" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> Get In Touch
+                    </a>
+                    <a href="Muhamamd_Azeem_Resume_.pdf" class="btn btn-secondary" download>
+                        <i class="fas fa-download"></i> Download CV
+                    </a>
+                </div>
+                <div class="hero-socials">
+                    <a href="https://linkedin.com/in/muhammad-azeem-4ba2a31b7" target="_blank" rel="noopener"
+                        aria-label="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://github.com/Muhammadazeem-eng" target="_blank" rel="noopener" aria-label="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://scholar.google.com/citations?user=FSMcx8YAAAAJ" target="_blank" rel="noopener"
+                        aria-label="Google Scholar">
+                        <i class="fas fa-graduation-cap"></i>
+                    </a>
+                    <a href="mailto:muhammad.azem03@gmail.com" aria-label="Email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image-wrapper">
+                <div class="hero-image-ring"></div>
+                <div class="hero-image-ring hero-image-ring-2"></div>
+                <img src="gif.gif" alt="Muhammad Azeem" class="hero-image">
+            </div>
+        </div>
+        <a href="#about" class="scroll-indicator" aria-label="Scroll down">
+            <div class="scroll-mouse">
+                <div class="scroll-wheel"></div>
+            </div>
+        </a>
+    </section>
+
+    <!-- ===== ABOUT SECTION ===== -->
+    <section class="section about" id="about">
+        <div class="container">
+            <h2 class="section-title reveal">
+                <span class="section-number">01.</span> About Me
+            </h2>
+            <div class="about-grid">
+                <div class="about-text reveal">
+                    <p>
+                        I'm an <strong>AI Engineer</strong> based in Faisalabad, Pakistan, with over <strong>4 years of
+                            experience</strong>
+                        building production-grade ML systems across healthcare, HR automation, and enterprise AI. I've
+                        delivered
+                        <strong>15+ end-to-end projects</strong> spanning LLM fine-tuning, RAG pipelines, computer
+                        vision, and
+                        multi-agent orchestration.
+                    </p>
+                    <p>
+                        I've published <strong>4 peer-reviewed papers</strong> and deployed scalable NLP solutions
+                        integrating
+                        <strong>9+ language models</strong> for real-time inference. My work at <strong>CyberGen
+                            USA</strong> involves
+                        architecting LLM-based systems, building healthcare AI tools like Clinical Trial Matchers, and
+                        engineering
+                        enterprise automation platforms.
+                    </p>
+                    <p>
+                        I combine applied research with full-stack ML engineering to ship high-performance,
+                        cost-optimized AI products
+                        — from transformer fine-tuning with LoRA/PEFT to production RAG deployments with vector
+                        databases.
+                    </p>
+                </div>
+                <div class="about-stats reveal">
+                    <div class="stat-card">
+                        <span class="stat-number" data-target="4">0</span>
+                        <span class="stat-suffix">+</span>
+                        <span class="stat-label">Years Experience</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number" data-target="15">0</span>
+                        <span class="stat-suffix">+</span>
+                        <span class="stat-label">Projects Delivered</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number" data-target="4">0</span>
+                        <span class="stat-suffix"></span>
+                        <span class="stat-label">Publications</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number" data-target="9">0</span>
+                        <span class="stat-suffix">+</span>
+                        <span class="stat-label">LLMs Integrated</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== EXPERIENCE SECTION ===== -->
+    <section class="section experience" id="experience">
+        <div class="container">
+            <h2 class="section-title reveal">
+                <span class="section-number">02.</span> Experience
+            </h2>
+            <div class="timeline">
+                <!-- AI Engineer @ CyberGen -->
+                <div class="timeline-item reveal">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content glass-card">
+                        <div class="timeline-header">
+                            <h3>AI Engineer</h3>
+                            <span class="timeline-company">CyberGen USA · Remote</span>
+                        </div>
+                        <span class="timeline-date"><i class="far fa-calendar-alt"></i> Feb 2022 — Present</span>
+                        <ul class="timeline-points">
+                            <li>Architected and deployed 9+ LLM-based systems integrating OpenAI and Hugging Face models
+                                for enterprise AI orchestration</li>
+                            <li>Developed and fine-tuned transformer-based NLP models using LoRA and PEFT across
+                                healthcare and enterprise use cases</li>
+                            <li>Built scalable RAG pipelines supporting multi-source ingestion (PDFs, YouTube, web) with
+                                vector databases (Pinecone, ChromaDB)</li>
+                            <li>Engineered 5+ domain-specific AI solutions including Clinical Trial Matcher, CV
+                                Screening, and Service Desk Automation</li>
+                            <li>Optimized deep learning inference pipelines using CNN and transformer architectures to
+                                improve throughput and deployment efficiency</li>
+                            <li>Designed automated data pipelines handling structured and unstructured datasets for ML
+                                training workflows</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Freelance Python Developer -->
+                <div class="timeline-item reveal">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content glass-card">
+                        <div class="timeline-header">
+                            <h3>Freelance Python Developer</h3>
+                            <span class="timeline-company">Remote (Freelance)</span>
+                        </div>
+                        <span class="timeline-date"><i class="far fa-calendar-alt"></i> Jul 2021 — Jan 2022</span>
+                        <ul class="timeline-points">
+                            <li>Analyzed 20+ client datasets using pandas, NumPy, and Matplotlib to extract insights and
+                                identify revenue-impacting trends</li>
+                            <li>Automated data cleaning, transformation, and validation tasks with custom Python
+                                scripts, reducing manual processing time by 60%</li>
+                            <li>Produced interactive data visualizations using Plotly and Seaborn for business reporting
+                                across 10+ client engagements</li>
+                            <li>Trained small-scale ML models using scikit-learn for classification and regression
+                                tasks, achieving 85%+ accuracy</li>
+                            <li>Delivered well-documented Python code and comprehensive analysis reports, maintaining a
+                                5-star satisfaction rating</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SKILLS SECTION ===== -->
+    <section class="section skills" id="skills">
+        <div class="container">
+            <h2 class="section-title reveal">
+                <span class="section-number">03.</span> Skills & Technologies
+            </h2>
+            <div class="skills-grid">
+                <div class="skill-category glass-card reveal">
+                    <div class="skill-icon"><i class="fas fa-code"></i></div>
+                    <h3>Languages</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">C++</span>
+                        <span class="skill-tag">SQL</span>
+                    </div>
+                </div>
+                <div class="skill-category glass-card reveal">
+                    <div class="skill-icon"><i class="fas fa-brain"></i></div>
+                    <h3>ML / DL Frameworks</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">PyTorch</span>
+                        <span class="skill-tag">TensorFlow</span>
+                        <span class="skill-tag">Hugging Face</span>
+                        <span class="skill-tag">scikit-learn</span>
+                    </div>
+                </div>
+                <div class="skill-category glass-card reveal">
+                    <div class="skill-icon"><i class="fas fa-robot"></i></div>
+                    <h3>LLM & NLP</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">LangChain</span>
+                        <span class="skill-tag">LlamaIndex</span>
+                        <span class="skill-tag">OpenAI API</span>
+                        <span class="skill-tag">RAG Pipelines</span>
+                        <span class="skill-tag">Prompt Engineering</span>
+                        <span class="skill-tag">Fine-tuning (LoRA, PEFT)</span>
+                    </div>
+                </div>
+                <div class="skill-category glass-card reveal">
+                    <div class="skill-icon"><i class="fas fa-eye"></i></div>
+                    <h3>Computer Vision</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">YOLOv4 / v8</span>
+                        <span class="skill-tag">OpenCV</span>
+                        <span class="skill-tag">CLIP</span>
+                    </div>
+                </div>
+                <div class="skill-category glass-card reveal">
+                    <div class="skill-icon"><i class="fas fa-server"></i></div>
+                    <h3>Infrastructure</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">Linux</span>
+                        <span class="skill-tag">Google Cloud</span>
+                        <span class="skill-tag">Azure</span>
+                    </div>
+                </div>
+                <div class="skill-category glass-card reveal">
+                    <div class="skill-icon"><i class="fas fa-database"></i></div>
+                    <h3>Databases</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">MongoDB</span>
+                        <span class="skill-tag">MySQL</span>
+                        <span class="skill-tag">Pinecone</span>
+                        <span class="skill-tag">ChromaDB</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PROJECTS SECTION ===== -->
+    <section class="section projects" id="projects">
+        <div class="container">
+            <h2 class="section-title reveal">
+                <span class="section-number">04.</span> Key Projects
+            </h2>
+            <p class="section-subtitle reveal"
+                style="color: var(--text-secondary); margin-top: -40px; margin-bottom: 50px; font-size: 1.02rem;">
+                Highlights from my work at <strong style="color: var(--accent);">CyberGen USA</strong> building
+                enterprise AI systems
+            </p>
+            <div class="projects-grid">
+                <div class="project-card glass-card reveal">
+                    <div class="project-card-header">
+                        <div class="project-icon"><i class="fas fa-network-wired"></i></div>
+                        <div class="project-links">
+                            <a href="https://github.com/Muhammadazeem-eng" target="_blank" rel="noopener"
+                                aria-label="View on GitHub"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    <h3 class="project-title">LLM Infrastructure & Orchestration</h3>
+                    <p class="project-desc">Architected AI Bus System integrating 9+ LLMs for enterprise prompt routing
+                        and multi-model orchestration. Built ARGUS monitoring framework for real-time observability and
+                        anomaly detection. Implemented policy enforcement layers (Rego Guardrails, Cortex Shield).</p>
+                    <div class="project-tech">
+                        <span>LangChain</span><span>OpenAI</span><span>Hugging Face</span><span>Python</span>
+                    </div>
+                </div>
+
+                <div class="project-card glass-card reveal">
+                    <div class="project-card-header">
+                        <div class="project-icon"><i class="fas fa-book-open"></i></div>
+                        <div class="project-links">
+                            <a href="https://github.com/Muhammadazeem-eng" target="_blank" rel="noopener"
+                                aria-label="View on GitHub"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    <h3 class="project-title">RAG & Knowledge Systems</h3>
+                    <p class="project-desc">Engineered Notebook LM aggregating YouTube, websites, and PDFs with
+                        contextual embeddings, indexing 10K+ documents. Built RBAC-enabled Knowledge Graph RAG chatbot
+                        achieving 92% relevance scores. Shipped 3 domain-specific chatbots for travel, education, and
+                        support.</p>
+                    <div class="project-tech">
+                        <span>RAG</span><span>Pinecone</span><span>ChromaDB</span><span>LlamaIndex</span>
+                    </div>
+                </div>
+
+                <div class="project-card glass-card reveal">
+                    <div class="project-card-header">
+                        <div class="project-icon"><i class="fas fa-heartbeat"></i></div>
+                        <div class="project-links">
+                            <a href="https://github.com/Muhammadazeem-eng" target="_blank" rel="noopener"
+                                aria-label="View on GitHub"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    <h3 class="project-title">Healthcare AI Suite</h3>
+                    <p class="project-desc">Built transformer-based Clinical Trial Matcher for EHR-to-trial patient
+                        matching across 500+ active trials. Delivered Clinical Note Summarizer reducing documentation
+                        time by 45%. Produced UMLS-aligned Medical Entity Extractor normalizing 200+ clinical entity
+                        types.</p>
+                    <div class="project-tech">
+                        <span>Transformers</span><span>NLP</span><span>LoRA</span><span>PEFT</span>
+                    </div>
+                </div>
+
+                <div class="project-card glass-card reveal">
+                    <div class="project-card-header">
+                        <div class="project-icon"><i class="fas fa-users-cog"></i></div>
+                        <div class="project-links">
+                            <a href="https://github.com/Muhammadazeem-eng" target="_blank" rel="noopener"
+                                aria-label="View on GitHub"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    <h3 class="project-title">HR & Enterprise Automation</h3>
+                    <p class="project-desc">Engineered CV Screening system processing 1,000+ applications per cycle.
+                        Launched Strategic Staffing Platform with AI-driven JD generation. Established Service Desk
+                        Automation resolving 30% of tickets without human intervention.</p>
+                    <div class="project-tech">
+                        <span>NLP</span><span>scikit-learn</span><span>FastAPI</span><span>RAG</span>
+                    </div>
+                </div>
+
+                <div class="project-card glass-card reveal">
+                    <div class="project-card-header">
+                        <div class="project-icon"><i class="fas fa-camera"></i></div>
+                        <div class="project-links">
+                            <a href="https://github.com/Muhammadazeem-eng" target="_blank" rel="noopener"
+                                aria-label="View on GitHub"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    <h3 class="project-title">Computer Vision Systems</h3>
+                    <p class="project-desc">Trained YOLOv8 models for real-time road defect detection from dashcam
+                        footage, achieving 89% mAP. Built YOLOv4-based acne detection with 5K+ image dataset. Integrated
+                        helmet detection with CCTV for construction site safety across 3 sites.</p>
+                    <div class="project-tech">
+                        <span>YOLOv8</span><span>YOLOv4</span><span>OpenCV</span><span>CLIP</span>
+                    </div>
+                </div>
+
+                <div class="project-card glass-card reveal">
+                    <div class="project-card-header">
+                        <div class="project-icon"><i class="fas fa-pen-fancy"></i></div>
+                        <div class="project-links">
+                            <a href="https://github.com/Muhammadazeem-eng" target="_blank" rel="noopener"
+                                aria-label="View on GitHub"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    <h3 class="project-title">Productivity & Content Tools</h3>
+                    <p class="project-desc">Fine-tuned GPT Writing Assistant supporting 8 writing styles. Orchestrated
+                        Multi-Agent System for automated content generation with content calendars. Built Coding Editor
+                        Agent for real-time code suggestions, reducing developer review time by 25%.</p>
+                    <div class="project-tech">
+                        <span>GPT</span><span>Multi-Agent</span><span>LangChain</span><span>Python</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CERTIFICATIONS SECTION ===== -->
+    <section class="section certifications" id="certifications">
+        <div class="container">
+            <h2 class="section-title reveal">
+                <span class="section-number">05.</span> Certifications
+            </h2>
+            <div class="certs-grid">
+                <div class="cert-card glass-card reveal">
+                    <div class="cert-logo"><i class="fas fa-award"></i></div>
+                    <h3>Machine Learning Specialization</h3>
+                    <p class="cert-issuer">DeepLearning.AI & Stanford University (Coursera)</p>
+                    <a href="https://www.coursera.org/account/accomplishments/specialization/certificate/CIDHZBHCT2BQ"
+                        target="_blank" rel="noopener" class="cert-link">View Certificate <i
+                            class="fas fa-external-link-alt"></i></a>
+                </div>
+                <div class="cert-card glass-card reveal">
+                    <div class="cert-logo"><i class="fas fa-award"></i></div>
+                    <h3>Supervised ML: Regression & Classification</h3>
+                    <p class="cert-issuer">DeepLearning.AI</p>
+                    <a href="https://www.coursera.org/account/accomplishments/records/1EYBKJU51OAN" target="_blank"
+                        rel="noopener" class="cert-link">View Certificate <i class="fas fa-external-link-alt"></i></a>
+                </div>
+                <div class="cert-card glass-card reveal">
+                    <div class="cert-logo"><i class="fas fa-award"></i></div>
+                    <h3>Advanced Learning Algorithms</h3>
+                    <p class="cert-issuer">DeepLearning.AI</p>
+                    <a href="https://www.coursera.org/account/accomplishments/records/ARE1GKLS9Q10" target="_blank"
+                        rel="noopener" class="cert-link">View Certificate <i class="fas fa-external-link-alt"></i></a>
+                </div>
+                <div class="cert-card glass-card reveal">
+                    <div class="cert-logo"><i class="fas fa-award"></i></div>
+                    <h3>Unsupervised Learning, Recommenders & RL</h3>
+                    <p class="cert-issuer">DeepLearning.AI</p>
+                    <a href="https://www.coursera.org/account/accomplishments/records/EG0FD8SOBHQ1" target="_blank"
+                        rel="noopener" class="cert-link">View Certificate <i class="fas fa-external-link-alt"></i></a>
+                </div>
+                <div class="cert-card glass-card reveal">
+                    <div class="cert-logo"><i class="fas fa-award"></i></div>
+                    <h3>Python for Data Science, AI & Development</h3>
+                    <p class="cert-issuer">IBM</p>
+                    <a href="https://coursera.org/share/c185db6d436400951b35a1a8bbae600d" target="_blank" rel="noopener"
+                        class="cert-link">View Certificate <i class="fas fa-external-link-alt"></i></a>
+                </div>
+                <div class="cert-card glass-card reveal">
+                    <div class="cert-logo"><i class="fas fa-award"></i></div>
+                    <h3>Computer Vision & Image Processing</h3>
+                    <p class="cert-issuer">IBM</p>
+                    <a href="https://www.credly.com/badges/f1fa4b54-901e-4630-82f6-c1a2737bf3c3/public_url"
+                        target="_blank" rel="noopener" class="cert-link">View Certificate <i
+                            class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PUBLICATIONS SECTION ===== -->
+    <section class="section publications" id="publications">
+        <div class="container">
+            <h2 class="section-title reveal">
+                <span class="section-number">06.</span> Publications
+            </h2>
+            <div class="publications-list">
+                <div class="pub-card glass-card reveal">
+                    <div class="pub-type"><i class="fas fa-file-alt"></i> 2025 (Accepted)</div>
+                    <h3>Enabling Sensor-Free Emission Monitoring for SMEs With Vision-Language Appliance Detection and
+                        Operational Context Inference</h3>
+                    <p class="pub-meta">Accepted to AINA 2026</p>
+                    <p class="pub-role">Designed and fine-tuned the YOLOv8-based appliance detection model, integrated
+                        CLIP-based operational context inference, and conducted performance evaluation for emission
+                        monitoring feasibility.</p>
+                </div>
+                <div class="pub-card glass-card reveal">
+                    <div class="pub-type"><i class="fas fa-file-alt"></i> 2023</div>
+                    <h3>An Interdigital Microwave Sensor Based on Differential Structure for Dielectric Constant
+                        Characteristics Measurement</h3>
+                    <p class="pub-meta">Peer-reviewed journal · Master's thesis work</p>
+                    <p class="pub-role">Independently designed the sensor, performed CST simulations, conducted
+                        experimental validation using VNA, and formulated mathematical models for dielectric constant
+                        estimation.</p>
+                    <a href="https://doi.org/10.3390/s23146551" target="_blank" rel="noopener" class="pub-link">
+                        DOI: 10.3390/s23146551 <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+                <div class="pub-card glass-card reveal">
+                    <div class="pub-type"><i class="fas fa-file-alt"></i> 2023</div>
+                    <h3>High-Sensitivity Liquid Dielectric Characterization Differential Sensor by 1-Bit Coding DGS</h3>
+                    <p class="pub-meta">Peer-reviewed journal · Sensor Design & Optimization</p>
+                    <p class="pub-role">Led sensor design and optimization using adaptive genetic algorithms and Debye
+                        framework modeling. Executed simulation analysis and regression-based permittivity estimation.
+                    </p>
+                    <a href="https://doi.org/10.3390/s23010372" target="_blank" rel="noopener" class="pub-link">
+                        DOI: 10.3390/s23010372 <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+                <div class="pub-card glass-card reveal">
+                    <div class="pub-type"><i class="fas fa-file-alt"></i> 2020</div>
+                    <h3>Microcontroller-Based Hybrid Power Electronics Trainer using PWM Techniques</h3>
+                    <p class="pub-meta">Peer-reviewed journal · Hardware & Control Systems</p>
+                    <p class="pub-role">Led trainer hardware development and PWM-based control system using
+                        microcontrollers. Handled circuit modeling, control calculations, and hardware testing
+                        procedures.</p>
+                    <a href="https://doi.org/10.14741/ijcet/v.10.6.4" target="_blank" rel="noopener" class="pub-link">
+                        DOI: 10.14741/ijcet/v.10.6.4 <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== EDUCATION SECTION ===== -->
+    <section class="section education" id="education">
+        <div class="container">
+            <h2 class="section-title reveal">
+                <span class="section-number">07.</span> Education
+            </h2>
+            <div class="education-grid">
+                <div class="edu-card glass-card reveal">
+                    <div class="edu-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h3>Master's in Electronics & Information Engineering</h3>
+                    <p class="edu-school">Harbin Institute of Technology, China</p>
+                    <p class="edu-date">2021 — 2023</p>
+                    <p class="edu-desc">Research focus on microwave sensor design, dielectric characterization, and AI
+                        applications. Published 2 journal papers from thesis work.</p>
+                </div>
+                <div class="edu-card glass-card reveal">
+                    <div class="edu-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h3>Bachelor's in Electrical Engineering</h3>
+                    <p class="edu-school">The University of Faisalabad</p>
+                    <p class="edu-date">2015 — 2019</p>
+                    <p class="edu-desc">Foundation in electronics, control systems, and power engineering. Published
+                        research on microcontroller-based PWM control systems.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT SECTION ===== -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <h2 class="section-title reveal">
+                <span class="section-number">08.</span> Get In Touch
+            </h2>
+            <div class="contact-grid">
+                <div class="contact-info reveal">
+                    <p class="contact-intro">
+                        I'm always open to new opportunities, collaborations, and interesting AI/ML projects.
+                        Whether you have a question or just want to say hi — feel free to reach out!
+                    </p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-item-icon"><i class="fas fa-envelope"></i></div>
+                            <div>
+                                <span class="contact-item-label">Email</span>
+                                <a href="mailto:muhammad.azem03@gmail.com">muhammad.azem03@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-item-icon"><i class="fas fa-phone-alt"></i></div>
+                            <div>
+                                <span class="contact-item-label">Phone</span>
+                                <a href="tel:+923222619000">+92 322 2619000</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div>
+                                <span class="contact-item-label">Location</span>
+                                <span>Faisalabad, Pakistan</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-socials">
+                        <a href="https://linkedin.com/in/muhammad-azeem-4ba2a31b7" target="_blank" rel="noopener"
+                            class="social-btn">
+                            <i class="fab fa-linkedin-in"></i> LinkedIn
+                        </a>
+                        <a href="https://github.com/Muhammadazeem-eng" target="_blank" rel="noopener"
+                            class="social-btn">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                        <a href="https://scholar.google.com/citations?user=FSMcx8YAAAAJ" target="_blank" rel="noopener"
+                            class="social-btn">
+                            <i class="fas fa-graduation-cap"></i> Scholar
+                        </a>
+                    </div>
+                </div>
+                <form class="contact-form glass-card reveal" id="contactForm">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" required placeholder=" ">
+                        <label for="name">Your Name</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" required placeholder=" ">
+                        <label for="email">Your Email</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="subject" name="subject" required placeholder=" ">
+                        <label for="subject">Subject</label>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" rows="5" required placeholder=" "></textarea>
+                        <label for="message">Message</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p class="footer-text">
+                    Designed & Built by <strong>Muhammad Azeem</strong>
+                </p>
+                <div class="footer-socials">
+                    <a href="https://linkedin.com/in/muhammad-azeem-4ba2a31b7" target="_blank" rel="noopener"><i
+                            class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/Muhammadazeem-eng" target="_blank" rel="noopener"><i
+                            class="fab fa-github"></i></a>
+                    <a href="mailto:muhammad.azem03@gmail.com"><i class="fas fa-envelope"></i></a>
+                </div>
+                <p class="footer-copy">&copy; 2026 Muhammad Azeem. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
