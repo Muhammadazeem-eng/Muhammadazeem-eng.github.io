@@ -15,8 +15,6 @@ function initLenis() {
         wheelMultiplier: 0.9, 
         touchMultiplier: 1.5 
     });
-    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
-    requestAnimationFrame(raf);
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add((time) => lenis.raf(time * 1000));
     gsap.ticker.lagSmoothing(0);
@@ -26,16 +24,33 @@ function initLenis() {
 function initNeuralCanvas() {
     const canvas = document.getElementById('neuralCanvas');
     if (!canvas) return;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
     const ctx = canvas.getContext('2d', { alpha: true });
-    canvas.style.willChange = 'transform';
+    const isMobile = window.innerWidth <= 768;
+    const maxParticles = isMobile ? 32 : 56;
+    const linkDistance = isMobile ? 90 : 120;
     let particles = [], mouse = { x: null, y: null, radius: 150 };
+    let isVisible = true;
+    let lastFrame = 0;
+    const targetFrameMs = isMobile ? 50 : 33; // Cap to ~20fps mobile / ~30fps desktop
+
     function resize() { canvas.width = canvas.parentElement.offsetWidth; canvas.height = canvas.parentElement.offsetHeight; initP(); }
     function initP() {
         particles = [];
-        const count = Math.min(Math.floor((canvas.width * canvas.height) / 14000), 100);
+        const count = Math.min(Math.floor((canvas.width * canvas.height) / 22000), maxParticles);
         for (let i = 0; i < count; i++) particles.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, vx: (Math.random() - 0.5) * 0.35, vy: (Math.random() - 0.5) * 0.35, r: Math.random() * 1.5 + 0.5, o: Math.random() * 0.4 + 0.15 });
     }
-    function draw() {
+    function draw(ts) {
+        if (!isVisible) {
+            requestAnimationFrame(draw);
+            return;
+        }
+        if (ts - lastFrame < targetFrameMs) {
+            requestAnimationFrame(draw);
+            return;
+        }
+        lastFrame = ts;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         particles.forEach(p => {
             p.x += p.vx; p.y += p.vy;
@@ -46,13 +61,14 @@ function initNeuralCanvas() {
         });
         for (let i = 0; i < particles.length; i++) for (let j = i+1; j < particles.length; j++) {
             const dx = particles[i].x-particles[j].x, dy = particles[i].y-particles[j].y, d = Math.sqrt(dx*dx+dy*dy);
-            if (d < 140) { ctx.beginPath(); ctx.moveTo(particles[i].x,particles[i].y); ctx.lineTo(particles[j].x,particles[j].y); ctx.strokeStyle = `rgba(8,145,178,${(1-d/140)*0.15})`; ctx.lineWidth=0.5; ctx.stroke(); }
+            if (d < linkDistance) { ctx.beginPath(); ctx.moveTo(particles[i].x,particles[i].y); ctx.lineTo(particles[j].x,particles[j].y); ctx.strokeStyle = `rgba(8,145,178,${(1-d/linkDistance)*0.14})`; ctx.lineWidth=0.5; ctx.stroke(); }
         }
         if (mouse.x !== null) particles.forEach(p => { const dx=mouse.x-p.x,dy=mouse.y-p.y,d=Math.sqrt(dx*dx+dy*dy); if(d<mouse.radius){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(mouse.x,mouse.y);ctx.strokeStyle=`rgba(229,88,10,${(1-d/mouse.radius)*0.3})`;ctx.lineWidth=0.6;ctx.stroke();} });
         requestAnimationFrame(draw);
     }
     canvas.parentElement.addEventListener('mousemove', e => { const r = canvas.getBoundingClientRect(); mouse.x = e.clientX-r.left; mouse.y = e.clientY-r.top; });
     canvas.parentElement.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
+    document.addEventListener('visibilitychange', () => { isVisible = !document.hidden; });
     resize(); window.addEventListener('resize', resize); draw();
 }
 
@@ -261,9 +277,10 @@ function initHeroMedia() {
     if (!video || video.tagName !== 'VIDEO') return;
     video.muted = true;
     video.playsInline = true;
+    video.preload = 'metadata';
     const tryPlay = () => video.play().catch(() => setTimeout(() => video.play().catch(() => {}), 500));
     if (video.readyState >= 2) tryPlay();
-    else video.addEventListener('loadeddata', tryPlay, { once: true });
+    else video.addEventListener('canplay', tryPlay, { once: true });
     document.addEventListener('visibilitychange', () => { if (!document.hidden && video.paused) tryPlay(); });
 }
 
