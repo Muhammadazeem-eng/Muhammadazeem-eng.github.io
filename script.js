@@ -80,33 +80,33 @@ function initPreloader() {
     const pre = document.getElementById('preloader'), fill = document.getElementById('preloaderFill'), counter = document.getElementById('preloaderCounter'), wipe = document.getElementById('preloaderWipe');
     let p = 0;
     const iv = setInterval(() => {
-        p += Math.random() * 12 + 3;
+        p += Math.random() * 25 + 10;
         if (p >= 100) {
             p = 100; fill.style.width = '100%'; counter.textContent = '100'; clearInterval(iv);
             setTimeout(() => {
-                gsap.to(wipe, { scaleY: 1, duration: 0.6, ease: 'power4.inOut', onComplete: () => {
+                gsap.to(wipe, { scaleY: 1, duration: 0.4, ease: 'power4.inOut', onComplete: () => {
                     pre.classList.add('done');
-                    gsap.to(pre, { opacity: 0, duration: 0.4, delay: 0.1, onComplete: () => { pre.style.display = 'none'; } });
+                    gsap.to(pre, { opacity: 0, duration: 0.2, delay: 0, onComplete: () => { pre.style.display = 'none'; } });
                     runHeroSequence();
                 }});
-            }, 300);
+            }, 100);
         } else { fill.style.width = p+'%'; counter.textContent = Math.floor(p); }
-    }, 60);
+    }, 30);
 }
 
 // ─── Hero GSAP Sequence ───
 function runHeroSequence() {
     gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
     const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
-    tl.to('.hero-tag', { opacity: 1, y: 0, duration: 1, delay: 0.2 })
-      .to('.split-word', { y: 0, duration: 1.2, stagger: 0.15, ease: 'power4.out' }, '-=0.6')
-      .to('.name-dot', { y: 0, duration: 0.8, ease: 'back.out(2)' }, '-=0.5')
-      .to('#heroRole', { opacity: 1, duration: 0.8 }, '-=0.4')
-      .to('#heroDesc', { opacity: 1, y: 0, duration: 0.8 }, '-=0.3')
-      .to('#heroActions', { opacity: 1, y: 0, duration: 0.8 }, '-=0.3')
-      .to('#heroSocials', { opacity: 1, y: 0, duration: 0.8 }, '-=0.3')
-      .to('#heroScroll', { opacity: 1, duration: 0.8 }, '-=0.2')
-      .from('.hero-portrait', { scale: 0.85, opacity: 0, duration: 1.5, ease: 'back.out(1.4)' }, '-=1.8');
+    tl.to('.hero-tag', { opacity: 1, y: 0, duration: 0.6, delay: 0.1 })
+      .to('.split-word', { y: 0, duration: 0.8, stagger: 0.08, ease: 'power4.out' }, '-=0.4')
+      .to('.name-dot', { y: 0, duration: 0.5, ease: 'back.out(2)' }, '-=0.3')
+      .to('#heroRole', { opacity: 1, duration: 0.5 }, '-=0.2')
+      .to('#heroDesc', { opacity: 1, y: 0, duration: 0.6 }, '-=0.3')
+      .to('#heroActions', { opacity: 1, y: 0, duration: 0.6 }, '-=0.4')
+      .to('#heroSocials', { opacity: 1, y: 0, duration: 0.6 }, '-=0.4')
+      .to('#heroScroll', { opacity: 1, duration: 0.5 }, '-=0.3')
+      .from('.hero-portrait', { scale: 0.95, opacity: 0, duration: 1, ease: 'power4.out' }, '-=1.2');
     // Counters
     document.querySelectorAll('.metric-num').forEach(el => {
         gsap.to(el, { textContent: +el.dataset.target, duration: 1.5, ease: 'power2.out', snap: { textContent: 1 }, delay: 1, scrollTrigger: { trigger: el, start: 'top 90%' } });
