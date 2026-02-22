@@ -7,7 +7,14 @@
 // ─── Lenis Smooth Scroll ───
 let lenis;
 function initLenis() {
-    lenis = new Lenis({ duration: 1.5, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smooth: true, smoothWheel: true, wheelMultiplier: 0.9, touchMultiplier: 2 });
+    lenis = new Lenis({ 
+        duration: window.innerWidth <= 768 ? 0.7 : 1.2, 
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+        smooth: true, 
+        smoothWheel: true, 
+        wheelMultiplier: 0.9, 
+        touchMultiplier: 1.5 
+    });
     function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
     requestAnimationFrame(raf);
     lenis.on('scroll', ScrollTrigger.update);
@@ -263,12 +270,17 @@ function initNavbar() {
             else l.classList.remove('active');
         });
     }, { passive: true });
-    btt.addEventListener('click', () => { if (lenis) lenis.scrollTo(0); else window.scrollTo({ top:0, behavior:'smooth' }); });
+    btt.addEventListener('click', () => { if (lenis) lenis.scrollTo(0, { duration: window.innerWidth <= 768 ? 0.6 : 1.2 }); else window.scrollTo({ top:0, behavior:'smooth' }); });
     document.querySelectorAll('a[href^="#"]').forEach(a => {
         a.addEventListener('click', function(e) {
             e.preventDefault();
-            const t = document.querySelector(this.getAttribute('href'));
-            if (t) { if (lenis) lenis.scrollTo(t); else t.scrollIntoView({ behavior: 'smooth' }); }
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            const t = document.querySelector(targetId);
+            if (t) { 
+                if (lenis) lenis.scrollTo(t, { duration: window.innerWidth <= 768 ? 0.6 : 1.2, lock: true }); 
+                else t.scrollIntoView({ behavior: 'smooth' }); 
+            }
         });
     });
 }
