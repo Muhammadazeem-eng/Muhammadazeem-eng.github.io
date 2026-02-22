@@ -255,6 +255,17 @@ function initTypewriter() {
     })();
 }
 
+// Keep hero video running if browser delays autoplay on initial paint.
+function initHeroMedia() {
+    const video = document.querySelector('.portrait-video');
+    if (!video) return;
+    const tryPlay = () => video.play().catch(() => {});
+    tryPlay();
+    document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) tryPlay();
+    });
+}
+
 // ─── Navbar ───
 function initNavbar() {
     const navbar = document.getElementById('navbar'), btt = document.getElementById('backToTop');
@@ -306,6 +317,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initCursor();
     initScrollProgress();
     initPreloader();
+    initHeroMedia();
     initTypewriter();
     initNavbar();
     initForm();
