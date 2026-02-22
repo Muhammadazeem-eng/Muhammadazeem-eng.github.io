@@ -255,15 +255,16 @@ function initTypewriter() {
     })();
 }
 
-// Keep hero video running if browser delays autoplay on initial paint.
+// Keep hero video running
 function initHeroMedia() {
     const video = document.querySelector('.portrait-video');
-    if (!video) return;
-    const tryPlay = () => video.play().catch(() => {});
-    tryPlay();
-    document.addEventListener('visibilitychange', () => {
-        if (!document.hidden) tryPlay();
-    });
+    if (!video || video.tagName !== 'VIDEO') return;
+    video.muted = true;
+    video.playsInline = true;
+    const tryPlay = () => video.play().catch(() => setTimeout(() => video.play().catch(() => {}), 500));
+    if (video.readyState >= 2) tryPlay();
+    else video.addEventListener('loadeddata', tryPlay, { once: true });
+    document.addEventListener('visibilitychange', () => { if (!document.hidden && video.paused) tryPlay(); });
 }
 
 // ─── Navbar ───
