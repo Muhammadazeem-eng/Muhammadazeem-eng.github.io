@@ -65,26 +65,27 @@
 
     <!-- ═══ NAVIGATION ═══ -->
     <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="#hero" class="nav-logo">
+        <div class="nav-container" id="navLinks">
+            <a href="#hero" class="dock-item nav-logo">
                 <span class="logo-text">MA</span>
-                <span class="logo-dot"></span>
+                <span class="dock-tooltip">Home</span>
             </a>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#about" class="nav-link" data-index="01">About</a></li>
-                <li><a href="#experience" class="nav-link" data-index="02">Experience</a></li>
-                <li><a href="#skills" class="nav-link" data-index="03">Skills</a></li>
-                <li><a href="#projects" class="nav-link" data-index="04">Projects</a></li>
-                <li><a href="#publications" class="nav-link" data-index="05">Research</a></li>
-                <li><a href="#contact" class="nav-link" data-index="06">Contact</a></li>
-            </ul>
-            <a href="Muhamamd_Azeem_Resume_.pdf" class="nav-cta" download>
-                <span>Resume</span>
-                <i class="ph-bold ph-download-simple"></i>
+            
+            <div class="dock-divider"></div>
+            
+            <a href="#about" class="dock-item nav-link"><i class="ph-duotone ph-user"></i><span class="dock-tooltip">About</span></a>
+            <a href="#experience" class="dock-item nav-link"><i class="ph-duotone ph-briefcase"></i><span class="dock-tooltip">Experience</span></a>
+            <a href="#skills" class="dock-item nav-link"><i class="ph-duotone ph-lightning"></i><span class="dock-tooltip">Skills</span></a>
+            <a href="#projects" class="dock-item nav-link"><i class="ph-duotone ph-folder-open"></i><span class="dock-tooltip">Projects</span></a>
+            <a href="#publications" class="dock-item nav-link"><i class="ph-duotone ph-flask"></i><span class="dock-tooltip">Research</span></a>
+            <a href="#contact" class="dock-item nav-link"><i class="ph-duotone ph-paper-plane-tilt"></i><span class="dock-tooltip">Contact</span></a>
+            
+            <div class="dock-divider"></div>
+            
+            <a href="Muhamamd_Azeem_Resume_.pdf" class="dock-item nav-cta" download>
+                <i class="ph-duotone ph-download-simple"></i>
+                <span class="dock-tooltip">Resume</span>
             </a>
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-                <span class="hamburger"></span>
-            </button>
         </div>
     </nav>
 

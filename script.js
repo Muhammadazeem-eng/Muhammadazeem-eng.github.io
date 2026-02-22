@@ -251,7 +251,6 @@ function initTypewriter() {
 // ─── Navbar ───
 function initNavbar() {
     const navbar = document.getElementById('navbar'), btt = document.getElementById('backToTop');
-    const toggle = document.getElementById('navToggle'), links = document.getElementById('navLinks');
     const sections = document.querySelectorAll('.section'), navLinks = document.querySelectorAll('.nav-link');
     window.addEventListener('scroll', () => {
         const y = window.scrollY;
@@ -259,11 +258,12 @@ function initNavbar() {
         btt.classList.toggle('visible', y > 500);
         let cur = '';
         sections.forEach(s => { if (y >= s.offsetTop - 120) cur = s.id; });
-        navLinks.forEach(l => { l.classList.toggle('active', l.getAttribute('href') === '#'+cur); });
+        navLinks.forEach(l => { 
+            if(l.getAttribute('href') === '#'+cur) l.classList.add('active');
+            else l.classList.remove('active');
+        });
     }, { passive: true });
     btt.addEventListener('click', () => { if (lenis) lenis.scrollTo(0); else window.scrollTo({ top:0, behavior:'smooth' }); });
-    toggle.addEventListener('click', () => { toggle.classList.toggle('active'); links.classList.toggle('active'); });
-    links.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => { toggle.classList.remove('active'); links.classList.remove('active'); }));
     document.querySelectorAll('a[href^="#"]').forEach(a => {
         a.addEventListener('click', function(e) {
             e.preventDefault();
