@@ -442,6 +442,7 @@ body{cursor:auto}.cursor-dot,.cursor-ring,.cursor-text{display:none}
 .hero-left{max-width:100%; align-items:flex-start}
 .hero-right{width:100%; display:flex; justify-content:center}
 .hero-portrait{width:100%; max-width:440px; height:460px; margin:0 auto}
+.portrait-img{object-position:top center}
 .hero-desc{max-width:100%}.hero-actions{flex-direction:column;gap:24px; align-items:flex-start}
 .hero-metrics{justify-content:flex-start}.hero-socials{justify-content:flex-start}.hero-scroll{display:none}
 .portrait-data-tag{left:50%;transform:translateX(-50%);bottom:-10px}
