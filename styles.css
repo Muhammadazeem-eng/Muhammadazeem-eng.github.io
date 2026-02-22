@@ -21,7 +21,7 @@
 
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:var(--nav-height)}
-body{font-family:var(--font-body);background:var(--bg);color:var(--text-primary);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased;cursor:none}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text-primary);line-height:1.7;overflow-x:clip;-webkit-font-smoothing:antialiased;cursor:none}
 ::selection{background:rgba(8,145,178,0.15);color:#0d0d1a}
 a{color:var(--accent);text-decoration:none;transition:var(--transition)}
 a:hover{color:var(--accent-dim)}
@@ -137,8 +137,8 @@ ul{list-style:none}
 .hero-right{flex-shrink:0}
 .hero-portrait{position:relative;width:340px;height:340px}
 .portrait-frame{width:100%;height:100%;border-radius:50%;overflow:hidden;position:relative;border:2px solid var(--border-subtle);box-shadow:0 12px 48px rgba(0,0,0,0.08)}
-.portrait-img{width:100%;height:100%;object-fit:cover;object-position:top center;filter:grayscale(10%) contrast(1.02);transition:filter .6s,transform .6s var(--ease)}
-.portrait-frame:hover .portrait-img{filter:grayscale(0%) contrast(1.05);transform:scale(1.05)}
+.portrait-img{width:100%;height:100%;object-fit:cover;object-position:top center;filter:grayscale(10%) contrast(1.02);transform:translateZ(0) scale(1);will-change:transform, filter;backface-visibility:hidden;transition:filter .6s,transform .6s var(--ease)}
+.portrait-frame:hover .portrait-img{filter:grayscale(0%) contrast(1.05);transform:translateZ(0) scale(1.05)}
 .portrait-scanline{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(8,145,178,0.02) 2px,rgba(8,145,178,0.02) 4px);pointer-events:none}
 .portrait-shine{position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,0.3) 45%,rgba(255,255,255,0.1) 50%,transparent 55%);transform:translateX(-100%);pointer-events:none}
 .portrait-frame:hover .portrait-shine{animation:shineEffect .8s ease forwards}
@@ -234,9 +234,16 @@ ul{list-style:none}
 .skill-item{padding:6px 14px;background:rgba(0,0,0,0.02);border:1px solid var(--border-faint);border-radius:4px;font-size:.8rem;color:var(--text-secondary);font-weight:500;transition:var(--transition)}
 .skill-item:hover{border-color:var(--accent);color:var(--accent);background:rgba(8,145,178,0.05);transform:translateY(-2px)}
 
-/* ─── Projects ─── */
-.projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.project-card{background:var(--bg-card);border:1px solid var(--border-faint);border-radius:var(--radius-md);padding:32px;display:flex;flex-direction:column;transition:var(--transition);position:relative;overflow:hidden;transform-style:preserve-3d}
+/* ─── Projects (Sticky Stack) ─── */
+.projects-stack{display:flex;flex-direction:column;gap:clamp(50vh, 600px, 80vh);margin-top:60px;padding-bottom:20vh;position:relative}
+.project-sticky-wrapper{position:sticky;top:15vh;width:100%;max-width:960px;margin:0 auto;height:420px;z-index:1}
+.project-sticky-wrapper:nth-child(1){top:calc(15vh + 0px)}
+.project-sticky-wrapper:nth-child(2){top:calc(15vh + 20px)}
+.project-sticky-wrapper:nth-child(3){top:calc(15vh + 40px)}
+.project-sticky-wrapper:nth-child(4){top:calc(15vh + 60px)}
+.project-sticky-wrapper:nth-child(5){top:calc(15vh + 80px)}
+.project-sticky-wrapper:nth-child(6){top:calc(15vh + 100px)}
+.project-card{height:100%;background:#ffffff;border:1px solid var(--border-faint);border-radius:var(--radius-md);padding:32px;display:flex;flex-direction:column;transition:border-color 0.3s, box-shadow 0.3s;position:relative;overflow:hidden;transform-origin:top center;will-change:transform, filter; z-index: 2}
 .project-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent-gradient);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease)}
 .project-card:hover::before{transform:scaleX(1)}
 .project-card:hover{border-color:var(--border-active);background:var(--bg-card-hover);box-shadow:var(--shadow-card),var(--shadow-glow)}
@@ -331,7 +338,7 @@ ul{list-style:none}
 .gs-reveal{opacity:0;transform:translateY(40px)}
 
 /* ─── Responsive ─── */
-@media(max-width:1024px){.hero-container{gap:40px}.hero-portrait{width:280px;height:280px}.skills-masonry{grid-template-columns:repeat(2,1fr)}.skill-block-lg{grid-column:span 2}.projects-grid{grid-template-columns:repeat(2,1fr)}.credentials-split{gap:40px}.about-layout{gap:40px}}
+@media(max-width:1024px){.hero-container{gap:40px}.hero-portrait{width:280px;height:280px}.skills-masonry{grid-template-columns:repeat(2,1fr)}.skill-block-lg{grid-column:span 2}.projects-stack{gap:40vh; max-width:85%}.project-sticky-wrapper{height:380px}.credentials-split{gap:40px}.about-layout{gap:40px}}
 @media(max-width:768px){
 body{cursor:auto}.cursor-dot,.cursor-ring,.cursor-text{display:none}
 .nav-links{position:fixed;top:var(--nav-height);left:0;right:0;background:rgba(250,250,248,0.97);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);flex-direction:column;padding:20px;gap:4px;border-bottom:1px solid var(--border-faint);transform:translateY(-120%);opacity:0;transition:var(--transition)}
@@ -347,7 +354,14 @@ body{cursor:auto}.cursor-dot,.cursor-ring,.cursor-text{display:none}
 .portrait-orbit{inset:-12px}.portrait-orbit-2{inset:-28px}
 .about-layout{grid-template-columns:1fr;gap:40px}
 .skills-masonry{grid-template-columns:1fr}.skill-block-lg{grid-column:span 1}
-.projects-grid{grid-template-columns:1fr}
+.projects-stack{gap:30vh; max-width:100%; margin-top:30px}
+.project-sticky-wrapper{height:320px; top:12vh!important}
+.project-sticky-wrapper:nth-child(1){top:calc(12vh + 0px)!important}
+.project-sticky-wrapper:nth-child(2){top:calc(12vh + 12px)!important}
+.project-sticky-wrapper:nth-child(3){top:calc(12vh + 24px)!important}
+.project-sticky-wrapper:nth-child(4){top:calc(12vh + 36px)!important}
+.project-sticky-wrapper:nth-child(5){top:calc(12vh + 48px)!important}
+.project-sticky-wrapper:nth-child(6){top:calc(12vh + 60px)!important}
 .pub-card{grid-template-columns:1fr;gap:12px}
 .credentials-split{grid-template-columns:1fr;gap:60px}
 .contact-layout{grid-template-columns:1fr;gap:32px}

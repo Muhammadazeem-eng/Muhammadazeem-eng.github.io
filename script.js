@@ -7,7 +7,7 @@
 // ─── Lenis Smooth Scroll ───
 let lenis;
 function initLenis() {
-    lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smooth: true });
+    lenis = new Lenis({ duration: 1.5, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smooth: true, smoothWheel: true, wheelMultiplier: 0.9, touchMultiplier: 2 });
     function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
     requestAnimationFrame(raf);
     lenis.on('scroll', ScrollTrigger.update);
@@ -19,7 +19,8 @@ function initLenis() {
 function initNeuralCanvas() {
     const canvas = document.getElementById('neuralCanvas');
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { alpha: true });
+    canvas.style.willChange = 'transform';
     let particles = [], mouse = { x: null, y: null, radius: 150 };
     function resize() { canvas.width = canvas.parentElement.offsetWidth; canvas.height = canvas.parentElement.offsetHeight; initP(); }
     function initP() {
@@ -43,8 +44,8 @@ function initNeuralCanvas() {
         if (mouse.x !== null) particles.forEach(p => { const dx=mouse.x-p.x,dy=mouse.y-p.y,d=Math.sqrt(dx*dx+dy*dy); if(d<mouse.radius){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(mouse.x,mouse.y);ctx.strokeStyle=`rgba(229,88,10,${(1-d/mouse.radius)*0.3})`;ctx.lineWidth=0.6;ctx.stroke();} });
         requestAnimationFrame(draw);
     }
-    canvas.addEventListener('mousemove', e => { const r = canvas.getBoundingClientRect(); mouse.x = e.clientX-r.left; mouse.y = e.clientY-r.top; });
-    canvas.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
+    canvas.parentElement.addEventListener('mousemove', e => { const r = canvas.getBoundingClientRect(); mouse.x = e.clientX-r.left; mouse.y = e.clientY-r.top; });
+    canvas.parentElement.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
     resize(); window.addEventListener('resize', resize); draw();
 }
 
@@ -97,15 +98,15 @@ function initPreloader() {
 function runHeroSequence() {
     gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
     const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
-    tl.to('.hero-tag', { opacity: 1, y: 0, duration: 0.8, delay: 0.15 })
-      .to('.split-word', { y: 0, duration: 1, stagger: 0.12, ease: 'power4.out' }, '-=0.5')
-      .to('.name-dot', { y: 0, duration: 0.6, ease: 'back.out(2)' }, '-=0.4')
-      .to('#heroRole', { opacity: 1, duration: 0.6 }, '-=0.3')
-      .to('#heroDesc', { opacity: 1, y: 0, duration: 0.6 }, '-=0.2')
-      .to('#heroActions', { opacity: 1, y: 0, duration: 0.6 }, '-=0.2')
-      .to('#heroSocials', { opacity: 1, y: 0, duration: 0.6 }, '-=0.2')
-      .to('#heroScroll', { opacity: 1, duration: 0.5 }, '-=0.1')
-      .from('.hero-portrait', { scale: 0.85, opacity: 0, duration: 1.2, ease: 'back.out(1.4)' }, '-=1.5');
+    tl.to('.hero-tag', { opacity: 1, y: 0, duration: 1, delay: 0.2 })
+      .to('.split-word', { y: 0, duration: 1.2, stagger: 0.15, ease: 'power4.out' }, '-=0.6')
+      .to('.name-dot', { y: 0, duration: 0.8, ease: 'back.out(2)' }, '-=0.5')
+      .to('#heroRole', { opacity: 1, duration: 0.8 }, '-=0.4')
+      .to('#heroDesc', { opacity: 1, y: 0, duration: 0.8 }, '-=0.3')
+      .to('#heroActions', { opacity: 1, y: 0, duration: 0.8 }, '-=0.3')
+      .to('#heroSocials', { opacity: 1, y: 0, duration: 0.8 }, '-=0.3')
+      .to('#heroScroll', { opacity: 1, duration: 0.8 }, '-=0.2')
+      .from('.hero-portrait', { scale: 0.85, opacity: 0, duration: 1.5, ease: 'back.out(1.4)' }, '-=1.8');
     // Counters
     document.querySelectorAll('.metric-num').forEach(el => {
         gsap.to(el, { textContent: +el.dataset.target, duration: 1.5, ease: 'power2.out', snap: { textContent: 1 }, delay: 1, scrollTrigger: { trigger: el, start: 'top 90%' } });
@@ -134,6 +135,42 @@ function initScrollAnimations() {
     gsap.to('.contact-form', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '.contact-form', start: 'top 85%', once: true } });
     gsap.to('.hero-portrait', { y: 80, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 } });
     gsap.utils.toArray('.section-line').forEach(l => { gsap.from(l, { width: 0, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: l, start: 'top 85%', once: true } }); });
+}
+
+// ─── Sticky Card Stack ───
+function initStickyStack() {
+    const wrappers = gsap.utils.toArray('.project-sticky-wrapper');
+    const stack = document.getElementById('projectsStack');
+    if (!wrappers.length || !stack) return;
+    
+    wrappers.forEach((wrapper, i) => {
+        const card = wrapper.querySelector('.project-card');
+        
+        // Inject a pure black overlay that we can control via opacity for high-performance shadows
+        // This is 100x smoother than animating CSS filter: brightness()
+        let overlay = document.createElement('div');
+        overlay.style.cssText = 'position:absolute; inset:0; background:rgba(0,0,0,0.6); opacity:0; z-index:10; pointer-events:none; border-radius:inherit; transition:none;';
+        card.appendChild(overlay);
+
+        if (i === wrappers.length - 1) return; // Last card stays static
+        
+        const targetScale = 1 - ((wrappers.length - i - 1) * 0.05); // e.g. 5 cards remaining = scales to 0.75
+        
+        // Timeline ensures scale and opacity run identically
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: wrapper,
+                start: "top top+=15%", // Anchors specifically when the card reaches its sticky position
+                endTrigger: stack,
+                end: "bottom bottom-=5%", // Finishes exactly when the whole stack is scrolled past
+                scrub: 0.5, // Added smoothing to make reverse unscroll fluid,
+                invalidateOnRefresh: true
+            }
+        });
+
+        tl.to(card, { scale: targetScale, transformOrigin: "top center", ease: "none" }, 0)
+          .to(overlay, { opacity: 1, ease: "none" }, 0);
+    });
 }
 
 // ─── 3D Tilt Effect ───
@@ -261,5 +298,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initNavbar();
     initForm();
     initRipple();
+    initStickyStack();
     setTimeout(() => { initTilt(); initCardGlow(); initMagnetic(); }, 1500);
 });
