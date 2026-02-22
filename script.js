@@ -1,272 +1,265 @@
-/* ===================================================================
-   MUHAMMAD AZEEM - PORTFOLIO SCRIPTS
-   Smooth scroll, typewriter, animations, nav interactions, wave BG
-   =================================================================== */
+/* ═══════════════════════════════════════════════════════════════
+   NEURAL LIGHT — Awwwards-Level Interactions
+   Lenis smooth scroll, GSAP orchestration, 3D tilt, cursor glow,
+   magnetic buttons, split-text hero, cinematic preloader
+   ═══════════════════════════════════════════════════════════════ */
 
-// ---- Flowing Wave Lines Background ----
-function initWaveBackground() {
-    const canvas = document.getElementById('waveBg');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    let animationId;
-    let time = 0;
-
-    function resize() {
-        canvas.width = canvas.parentElement.offsetWidth;
-        canvas.height = canvas.parentElement.offsetHeight;
-    }
-    resize();
-    window.addEventListener('resize', resize);
-
-    function drawWaveLine(yBase, amplitude, frequency, speed, color, lineWidth, phaseOffset) {
-        ctx.beginPath();
-        ctx.strokeStyle = color;
-        ctx.lineWidth = lineWidth;
-        for (let x = 0; x <= canvas.width; x += 2) {
-            const normalX = x / canvas.width;
-            const y = yBase +
-                Math.sin(normalX * frequency + time * speed + phaseOffset) * amplitude +
-                Math.sin(normalX * frequency * 0.5 + time * speed * 0.7 + phaseOffset * 1.3) * (amplitude * 0.4);
-            if (x === 0) ctx.moveTo(x, y);
-            else ctx.lineTo(x, y);
-        }
-        ctx.stroke();
-    }
-
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        const h = canvas.height;
-        const w = canvas.width;
-
-        // Draw multiple flowing wave lines — purple and cyan
-        const waveConfig = [
-            // Purple waves
-            { yBase: h * 0.25, amp: 60, freq: 4, speed: 0.4, color: 'rgba(124, 58, 237, 0.06)', width: 1.2, phase: 0 },
-            { yBase: h * 0.30, amp: 80, freq: 3.5, speed: 0.35, color: 'rgba(124, 58, 237, 0.08)', width: 1.5, phase: 1 },
-            { yBase: h * 0.35, amp: 55, freq: 5, speed: 0.5, color: 'rgba(124, 58, 237, 0.05)', width: 1.0, phase: 2 },
-            { yBase: h * 0.28, amp: 70, freq: 3, speed: 0.3, color: 'rgba(168, 85, 247, 0.07)', width: 1.3, phase: 3 },
-            { yBase: h * 0.40, amp: 50, freq: 6, speed: 0.45, color: 'rgba(139, 92, 246, 0.04)', width: 0.8, phase: 4 },
-            // Cyan waves
-            { yBase: h * 0.55, amp: 70, freq: 3.5, speed: 0.38, color: 'rgba(6, 182, 212, 0.06)', width: 1.2, phase: 0.5 },
-            { yBase: h * 0.60, amp: 90, freq: 3, speed: 0.32, color: 'rgba(6, 182, 212, 0.08)', width: 1.5, phase: 1.5 },
-            { yBase: h * 0.65, amp: 55, freq: 4.5, speed: 0.42, color: 'rgba(6, 182, 212, 0.05)', width: 1.0, phase: 2.5 },
-            { yBase: h * 0.58, amp: 65, freq: 3.8, speed: 0.28, color: 'rgba(34, 211, 238, 0.06)', width: 1.2, phase: 3.5 },
-            { yBase: h * 0.70, amp: 45, freq: 5.5, speed: 0.5, color: 'rgba(6, 182, 212, 0.04)', width: 0.8, phase: 4.5 },
-            // Intersecting lines in middle
-            { yBase: h * 0.45, amp: 100, freq: 2.5, speed: 0.25, color: 'rgba(124, 58, 237, 0.04)', width: 1.0, phase: 5 },
-            { yBase: h * 0.50, amp: 85, freq: 2.8, speed: 0.3, color: 'rgba(6, 182, 212, 0.04)', width: 1.0, phase: 5.5 },
-        ];
-
-        waveConfig.forEach(w => {
-            drawWaveLine(w.yBase, w.amp, w.freq, w.speed, w.color, w.width, w.phase);
-        });
-
-        time += 0.008;
-        animationId = requestAnimationFrame(animate);
-    }
-
-    animate();
+// ─── Lenis Smooth Scroll ───
+let lenis;
+function initLenis() {
+    lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smooth: true });
+    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time) => lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    // ---- Init wave background ----
-    initWaveBackground();
+// ─── Neural Network Canvas ───
+function initNeuralCanvas() {
+    const canvas = document.getElementById('neuralCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let particles = [], mouse = { x: null, y: null, radius: 150 };
+    function resize() { canvas.width = canvas.parentElement.offsetWidth; canvas.height = canvas.parentElement.offsetHeight; initP(); }
+    function initP() {
+        particles = [];
+        const count = Math.min(Math.floor((canvas.width * canvas.height) / 14000), 100);
+        for (let i = 0; i < count; i++) particles.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, vx: (Math.random() - 0.5) * 0.35, vy: (Math.random() - 0.5) * 0.35, r: Math.random() * 1.5 + 0.5, o: Math.random() * 0.4 + 0.15 });
+    }
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+            p.x += p.vx; p.y += p.vy;
+            if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+            if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+            if (mouse.x !== null) { const dx = p.x - mouse.x, dy = p.y - mouse.y, d = Math.sqrt(dx*dx+dy*dy); if (d < mouse.radius * 0.6) { p.x += dx/d*0.8; p.y += dy/d*0.8; } }
+            ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); ctx.fillStyle = `rgba(8,145,178,${p.o*0.7})`; ctx.fill();
+        });
+        for (let i = 0; i < particles.length; i++) for (let j = i+1; j < particles.length; j++) {
+            const dx = particles[i].x-particles[j].x, dy = particles[i].y-particles[j].y, d = Math.sqrt(dx*dx+dy*dy);
+            if (d < 140) { ctx.beginPath(); ctx.moveTo(particles[i].x,particles[i].y); ctx.lineTo(particles[j].x,particles[j].y); ctx.strokeStyle = `rgba(8,145,178,${(1-d/140)*0.15})`; ctx.lineWidth=0.5; ctx.stroke(); }
+        }
+        if (mouse.x !== null) particles.forEach(p => { const dx=mouse.x-p.x,dy=mouse.y-p.y,d=Math.sqrt(dx*dx+dy*dy); if(d<mouse.radius){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(mouse.x,mouse.y);ctx.strokeStyle=`rgba(229,88,10,${(1-d/mouse.radius)*0.3})`;ctx.lineWidth=0.6;ctx.stroke();} });
+        requestAnimationFrame(draw);
+    }
+    canvas.addEventListener('mousemove', e => { const r = canvas.getBoundingClientRect(); mouse.x = e.clientX-r.left; mouse.y = e.clientY-r.top; });
+    canvas.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
+    resize(); window.addEventListener('resize', resize); draw();
+}
 
-    // ---- Typewriter Effect ----
-    const typewriterEl = document.getElementById('typewriterText');
-    const titles = [
-        'AI Engineer',
-        'ML Researcher',
-        'LLM Specialist',
-        'Computer Vision Engineer',
-        'RAG Pipeline Architect'
+// ─── Custom Cursor ───
+function initCursor() {
+    if (window.innerWidth <= 768) return;
+    const dot = document.getElementById('cursorDot'), ring = document.getElementById('cursorRing'), txt = document.getElementById('cursorText');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; dot.style.left = mx+'px'; dot.style.top = my+'px'; txt.style.left = mx+'px'; txt.style.top = (my-30)+'px'; });
+    (function animR() { rx += (mx-rx)*0.12; ry += (my-ry)*0.12; ring.style.left = rx+'px'; ring.style.top = ry+'px'; requestAnimationFrame(animR); })();
+    document.querySelectorAll('a, button, .btn-neural, .social-link, .nav-link, .nav-cta, .contact-card, .cred-link, .pub-link, .project-ext, .social-btn-lg').forEach(el => {
+        el.addEventListener('mouseenter', () => { dot.classList.add('hovering'); ring.classList.add('hovering'); });
+        el.addEventListener('mouseleave', () => { dot.classList.remove('hovering'); ring.classList.remove('hovering'); });
+    });
+    document.querySelectorAll('[data-cursor]').forEach(el => {
+        el.addEventListener('mouseenter', () => { dot.classList.add('card-hover'); ring.classList.add('card-hover'); txt.textContent = el.dataset.cursor; txt.classList.add('visible'); });
+        el.addEventListener('mouseleave', () => { dot.classList.remove('card-hover'); ring.classList.remove('card-hover'); txt.classList.remove('visible'); });
+    });
+}
+
+// ─── Scroll Progress ───
+function initScrollProgress() {
+    const bar = document.getElementById('scrollProgress');
+    window.addEventListener('scroll', () => {
+        const h = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = (window.scrollY / h * 100) + '%';
+    }, { passive: true });
+}
+
+// ─── Cinematic Preloader ───
+function initPreloader() {
+    const pre = document.getElementById('preloader'), fill = document.getElementById('preloaderFill'), counter = document.getElementById('preloaderCounter'), wipe = document.getElementById('preloaderWipe');
+    let p = 0;
+    const iv = setInterval(() => {
+        p += Math.random() * 12 + 3;
+        if (p >= 100) {
+            p = 100; fill.style.width = '100%'; counter.textContent = '100'; clearInterval(iv);
+            setTimeout(() => {
+                gsap.to(wipe, { scaleY: 1, duration: 0.6, ease: 'power4.inOut', onComplete: () => {
+                    pre.classList.add('done');
+                    gsap.to(pre, { opacity: 0, duration: 0.4, delay: 0.1, onComplete: () => { pre.style.display = 'none'; } });
+                    runHeroSequence();
+                }});
+            }, 300);
+        } else { fill.style.width = p+'%'; counter.textContent = Math.floor(p); }
+    }, 60);
+}
+
+// ─── Hero GSAP Sequence ───
+function runHeroSequence() {
+    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+    const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
+    tl.to('.hero-tag', { opacity: 1, y: 0, duration: 0.8, delay: 0.15 })
+      .to('.split-word', { y: 0, duration: 1, stagger: 0.12, ease: 'power4.out' }, '-=0.5')
+      .to('.name-dot', { y: 0, duration: 0.6, ease: 'back.out(2)' }, '-=0.4')
+      .to('#heroRole', { opacity: 1, duration: 0.6 }, '-=0.3')
+      .to('#heroDesc', { opacity: 1, y: 0, duration: 0.6 }, '-=0.2')
+      .to('#heroActions', { opacity: 1, y: 0, duration: 0.6 }, '-=0.2')
+      .to('#heroSocials', { opacity: 1, y: 0, duration: 0.6 }, '-=0.2')
+      .to('#heroScroll', { opacity: 1, duration: 0.5 }, '-=0.1')
+      .from('.hero-portrait', { scale: 0.85, opacity: 0, duration: 1.2, ease: 'back.out(1.4)' }, '-=1.5');
+    // Counters
+    document.querySelectorAll('.metric-num').forEach(el => {
+        gsap.to(el, { textContent: +el.dataset.target, duration: 1.5, ease: 'power2.out', snap: { textContent: 1 }, delay: 1, scrollTrigger: { trigger: el, start: 'top 90%' } });
+    });
+    initScrollAnimations();
+}
+
+// ─── Scroll-Triggered Animations ───
+function initScrollAnimations() {
+    gsap.utils.toArray('.gs-reveal').forEach(el => {
+        gsap.to(el, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 85%', once: true } });
+    });
+    document.querySelectorAll('.about-stats .stat-number').forEach(el => {
+        gsap.to(el, { textContent: +el.dataset.target, duration: 1.5, ease: 'power2.out', snap: { textContent: 1 }, scrollTrigger: { trigger: el, start: 'top 85%', once: true, onEnter: () => el.closest('.stat-block')?.classList.add('in-view') } });
+    });
+    const staggerSets = [
+        { sel: '.project-card', delay: 0.08 }, { sel: '.skill-block', delay: 0.06 },
+        { sel: '.exp-card', delay: 0.1 }, { sel: '.pub-card', delay: 0.1 },
+        { sel: '.cred-card', delay: 0.06 }, { sel: '.edu-card', delay: 0.1 }
     ];
-    let titleIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    let typingSpeed = 80;
-
-    function typewrite() {
-        const current = titles[titleIndex];
-
-        if (isDeleting) {
-            typewriterEl.textContent = current.substring(0, charIndex - 1);
-            charIndex--;
-            typingSpeed = 40;
-        } else {
-            typewriterEl.textContent = current.substring(0, charIndex + 1);
-            charIndex++;
-            typingSpeed = 80;
-        }
-
-        if (!isDeleting && charIndex === current.length) {
-            typingSpeed = 2000; // pause at end
-            isDeleting = true;
-        } else if (isDeleting && charIndex === 0) {
-            isDeleting = false;
-            titleIndex = (titleIndex + 1) % titles.length;
-            typingSpeed = 400; // pause before next word
-        }
-
-        setTimeout(typewrite, typingSpeed);
-    }
-
-    typewrite();
-
-    // ---- Navbar scroll effect ----
-    const navbar = document.getElementById('navbar');
-    const backToTop = document.getElementById('backToTop');
-
-    function handleScroll() {
-        const scrollY = window.scrollY;
-
-        // Navbar background
-        if (scrollY > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-
-        // Back to top
-        if (scrollY > 500) {
-            backToTop.classList.add('visible');
-        } else {
-            backToTop.classList.remove('visible');
-        }
-
-        // Active nav link
-        highlightActiveNav();
-    }
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
-    // ---- Back to top ----
-    backToTop.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    // ---- Mobile menu toggle ----
-    const navToggle = document.getElementById('navToggle');
-    const navLinks = document.getElementById('navLinks');
-
-    navToggle.addEventListener('click', () => {
-        navToggle.classList.toggle('active');
-        navLinks.classList.toggle('active');
-    });
-
-    // Close mobile menu on link click
-    navLinks.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            navToggle.classList.remove('active');
-            navLinks.classList.remove('active');
+    staggerSets.forEach(({ sel, delay }) => {
+        gsap.utils.toArray(sel).forEach((el, i) => {
+            gsap.to(el, { opacity: 1, y: 0, duration: 0.7, delay: i * delay, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%', once: true } });
         });
     });
+    gsap.to('.contact-form', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '.contact-form', start: 'top 85%', once: true } });
+    gsap.to('.hero-portrait', { y: 80, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 } });
+    gsap.utils.toArray('.section-line').forEach(l => { gsap.from(l, { width: 0, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: l, start: 'top 85%', once: true } }); });
+}
 
-    // ---- Active nav highlight on scroll ----
-    const sections = document.querySelectorAll('.section');
-    const navLinkElements = document.querySelectorAll('.nav-link');
-
-    function highlightActiveNav() {
-        let current = '';
-        sections.forEach(section => {
-            const top = section.offsetTop - 120;
-            if (window.scrollY >= top) {
-                current = section.getAttribute('id');
-            }
+// ─── 3D Tilt Effect ───
+function initTilt() {
+    if (window.innerWidth <= 768) return;
+    document.querySelectorAll('[data-tilt]').forEach(el => {
+        el.addEventListener('mousemove', e => {
+            const r = el.getBoundingClientRect();
+            const x = (e.clientX - r.left) / r.width - 0.5;
+            const y = (e.clientY - r.top) / r.height - 0.5;
+            gsap.to(el, { rotateY: x * 8, rotateX: -y * 8, duration: 0.4, ease: 'power2.out', transformPerspective: 600 });
         });
-
-        navLinkElements.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${current}`) {
-                link.classList.add('active');
-            }
+        el.addEventListener('mouseleave', () => {
+            gsap.to(el, { rotateY: 0, rotateX: 0, duration: 0.6, ease: 'elastic.out(1,0.5)' });
         });
-    }
-
-    // ---- Scroll reveal (IntersectionObserver) ----
-    const revealElements = document.querySelectorAll('.reveal');
-
-    const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-                revealObserver.unobserve(entry.target);
-            }
-        });
-    }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
     });
+}
 
-    revealElements.forEach(el => revealObserver.observe(el));
-
-    // ---- Animated counter for stats ----
-    const statNumbers = document.querySelectorAll('.stat-number');
-
-    const counterObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const target = parseInt(entry.target.getAttribute('data-target'));
-                animateCounter(entry.target, target);
-                counterObserver.unobserve(entry.target);
-            }
+// ─── Cursor-Following Card Glow ───
+function initCardGlow() {
+    if (window.innerWidth <= 768) return;
+    document.querySelectorAll('.project-card-glow, .skill-block-glow, .exp-card-glow').forEach(glow => {
+        const card = glow.parentElement;
+        card.addEventListener('mousemove', e => {
+            const r = card.getBoundingClientRect();
+            glow.style.left = (e.clientX - r.left - 100) + 'px';
+            glow.style.top = (e.clientY - r.top - 100) + 'px';
         });
-    }, { threshold: 0.5 });
-
-    statNumbers.forEach(num => counterObserver.observe(num));
-
-    function animateCounter(el, target) {
-        let count = 0;
-        const duration = 1500;
-        const increment = target / (duration / 30);
-
-        const timer = setInterval(() => {
-            count += increment;
-            if (count >= target) {
-                el.textContent = target;
-                clearInterval(timer);
-            } else {
-                el.textContent = Math.floor(count);
-            }
-        }, 30);
-    }
-
-    // ---- Contact form (basic handler) ----
-    const contactForm = document.getElementById('contactForm');
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-
-        const formData = new FormData(contactForm);
-        const data = Object.fromEntries(formData);
-
-        // Construct mailto link as fallback
-        const subject = encodeURIComponent(data.subject || 'Portfolio Contact');
-        const body = encodeURIComponent(
-            `Name: ${data.name}\nEmail: ${data.email}\n\n${data.message}`
-        );
-        window.location.href = `mailto:muhammad.azem03@gmail.com?subject=${subject}&body=${body}`;
-
-        // Visual feedback
-        const btn = contactForm.querySelector('button[type="submit"]');
-        const originalHTML = btn.innerHTML;
-        btn.innerHTML = '<i class="fas fa-check"></i> Opening Mail Client...';
-        btn.style.pointerEvents = 'none';
-
-        setTimeout(() => {
-            btn.innerHTML = originalHTML;
-            btn.style.pointerEvents = '';
-            contactForm.reset();
-        }, 3000);
     });
+}
 
-    // ---- Smooth scroll for all anchor links ----
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
+// ─── Magnetic Effect ───
+function initMagnetic() {
+    if (window.innerWidth <= 768) return;
+    document.querySelectorAll('.btn-neural, .social-link, .back-to-top').forEach(btn => {
+        btn.addEventListener('mousemove', e => {
+            const r = btn.getBoundingClientRect();
+            gsap.to(btn, { x: (e.clientX - r.left - r.width/2) * 0.25, y: (e.clientY - r.top - r.height/2) * 0.25, duration: 0.3, ease: 'power2.out' });
+        });
+        btn.addEventListener('mouseleave', () => { gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1,0.5)' }); });
+    });
+}
+
+// ─── Button Ripple ───
+function initRipple() {
+    document.querySelectorAll('.btn-neural').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            const ripple = this.querySelector('.btn-ripple');
+            if (!ripple) return;
+            const r = this.getBoundingClientRect();
+            const size = Math.max(r.width, r.height) * 2;
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = (e.clientX - r.left - size/2) + 'px';
+            ripple.style.top = (e.clientY - r.top - size/2) + 'px';
+            ripple.style.animation = 'none';
+            ripple.offsetHeight;
+            ripple.style.animation = 'rippleEffect 0.6s ease-out forwards';
+        });
+    });
+}
+
+// ─── Typewriter ───
+function initTypewriter() {
+    const el = document.getElementById('roleDynamic');
+    if (!el) return;
+    const phrases = ['production ML systems', 'RAG pipelines & LLM agents', 'computer vision models', 'enterprise AI platforms', 'multi-agent orchestration'];
+    let pi = 0, ci = 0, del = false, spd = 60;
+    (function type() {
+        const cur = phrases[pi];
+        if (del) { el.textContent = cur.substring(0, --ci); spd = 30; }
+        else { el.textContent = cur.substring(0, ++ci); spd = 60; }
+        if (!del && ci === cur.length) { spd = 2500; del = true; }
+        else if (del && ci === 0) { del = false; pi = (pi+1) % phrases.length; spd = 300; }
+        setTimeout(type, spd);
+    })();
+}
+
+// ─── Navbar ───
+function initNavbar() {
+    const navbar = document.getElementById('navbar'), btt = document.getElementById('backToTop');
+    const toggle = document.getElementById('navToggle'), links = document.getElementById('navLinks');
+    const sections = document.querySelectorAll('.section'), navLinks = document.querySelectorAll('.nav-link');
+    window.addEventListener('scroll', () => {
+        const y = window.scrollY;
+        navbar.classList.toggle('scrolled', y > 50);
+        btt.classList.toggle('visible', y > 500);
+        let cur = '';
+        sections.forEach(s => { if (y >= s.offsetTop - 120) cur = s.id; });
+        navLinks.forEach(l => { l.classList.toggle('active', l.getAttribute('href') === '#'+cur); });
+    }, { passive: true });
+    btt.addEventListener('click', () => { if (lenis) lenis.scrollTo(0); else window.scrollTo({ top:0, behavior:'smooth' }); });
+    toggle.addEventListener('click', () => { toggle.classList.toggle('active'); links.classList.toggle('active'); });
+    links.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => { toggle.classList.remove('active'); links.classList.remove('active'); }));
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', function(e) {
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth' });
-            }
+            const t = document.querySelector(this.getAttribute('href'));
+            if (t) { if (lenis) lenis.scrollTo(t); else t.scrollIntoView({ behavior: 'smooth' }); }
         });
     });
+}
+
+// ─── Contact Form ───
+function initForm() {
+    const form = document.getElementById('contactForm');
+    if (!form) return;
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        const d = Object.fromEntries(new FormData(form));
+        window.location.href = `mailto:muhammad.azem03@gmail.com?subject=${encodeURIComponent(d.subject||'Portfolio Contact')}&body=${encodeURIComponent(`Name: ${d.name}\nEmail: ${d.email}\n\n${d.message}`)}`;
+        const btn = form.querySelector('.btn-neural-text');
+        if (btn) { const orig = btn.textContent; btn.textContent = 'Opening Mail...'; setTimeout(() => { btn.textContent = orig; form.reset(); }, 3000); }
+    });
+}
+
+// ─── Init ───
+document.addEventListener('DOMContentLoaded', () => {
+    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+    initLenis();
+    initNeuralCanvas();
+    initCursor();
+    initScrollProgress();
+    initPreloader();
+    initTypewriter();
+    initNavbar();
+    initForm();
+    initRipple();
+    setTimeout(() => { initTilt(); initCardGlow(); initMagnetic(); }, 1500);
 });
