@@ -84,7 +84,7 @@ ul{list-style:none}
 .nav-toggle.active .hamburger::after{top:0;transform:rotate(-45deg);background:var(--accent)}
 
 /* ─── Hero ─── */
-.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding-top:var(--nav-height);background:var(--bg)}
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding-top:calc(var(--nav-height) + 40px);padding-bottom:120px;background:var(--bg)}
 .neural-canvas{position:absolute;inset:0;z-index:0;pointer-events:none}
 .hero-grid-overlay{position:absolute;inset:0;z-index:0;background-image:linear-gradient(rgba(0,0,0,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.025) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse at center,black 30%,transparent 80%);-webkit-mask-image:radial-gradient(ellipse at center,black 30%,transparent 80%)}
 
