@@ -10,6 +10,9 @@
     <meta name="author" content="Muhammad Azeem">
     <meta name="keywords"
         content="AI Engineer, Machine Learning, Deep Learning, LLM, RAG, Computer Vision, Python, PyTorch, TensorFlow, LangChain, CyberGen">
+    <link rel="canonical" href="https://muhammadazeem-eng.github.io/">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#ffffff">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="picturew.png">
@@ -21,22 +24,74 @@
     <meta property="og:description"
         content="AI Engineer with 4+ years of experience building production-grade ML systems across healthcare, HR automation, and enterprise AI.">
     <meta property="og:url" content="https://muhammadazeem-eng.github.io/">
+    <meta property="og:site_name" content="Muhammad Azeem Portfolio">
+    <meta property="og:image" content="https://muhammadazeem-eng.github.io/picturew.png">
+    <meta property="og:image:width" content="600">
+    <meta property="og:image:height" content="600">
+    <meta property="og:locale" content="en_US">
 
-    <!-- Fonts: Clash Display + Satoshi -->
-    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Muhammad Azeem | AI Engineer & ML Researcher">
+    <meta name="twitter:description" content="AI Engineer with 4+ years building production-grade ML systems. 15+ projects, 4 published papers.">
+    <meta name="twitter:image" content="https://muhammadazeem-eng.github.io/picturew.png">
 
-    <!-- Icons -->
-    <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+    <!-- Resource Hints — reduce DNS/TLS latency for external assets -->
+    <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="dns-prefetch" href="https://api.fontshare.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://unpkg.com">
 
-    <!-- GSAP + Plugins -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+    <!-- Preload critical font CSS (removed unused weights 200,300) -->
+    <link rel="preload" href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@300,400,500,700&display=swap" as="style">
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
 
-    <!-- Lenis Smooth Scroll -->
-    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+    <!-- Preload hero video for instant playback -->
+    <link rel="preload" href="hero-loop.webm" as="video" type="video/webm">
 
+    <!-- Critical CSS first -->
     <link rel="stylesheet" href="styles.css">
+
+    <!-- JSON-LD Structured Data for SEO rich snippets -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Muhammad Azeem",
+        "jobTitle": "AI Engineer & ML Researcher",
+        "url": "https://muhammadazeem-eng.github.io/",
+        "image": "https://muhammadazeem-eng.github.io/picturew.png",
+        "email": "muhammad.azem03@gmail.com",
+        "telephone": "+923222619000",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Faisalabad",
+            "addressCountry": "PK"
+        },
+        "sameAs": [
+            "https://linkedin.com/in/muhammad-azeem-4ba2a31b7",
+            "https://github.com/Muhammadazeem-eng",
+            "https://scholar.google.com/citations?user=FSMcx8YAAAAJ"
+        ],
+        "alumniOf": [
+            { "@type": "CollegeOrUniversity", "name": "Harbin Institute of Technology" },
+            { "@type": "CollegeOrUniversity", "name": "The University of Faisalabad" }
+        ],
+        "knowsAbout": ["Artificial Intelligence", "Machine Learning", "Deep Learning", "LLM", "RAG Pipelines", "Computer Vision", "NLP", "Python", "PyTorch", "TensorFlow", "LangChain"]
+    }
+    </script>
+
+    <!-- Noscript fallback — content visible without JS -->
+    <noscript>
+        <style>
+            .preloader { display: none !important; }
+            .gs-reveal { opacity: 1 !important; transform: none !important; }
+            .split-word, .name-dot { transform: none !important; }
+            .hero-tag, #heroRole, #heroDesc, #heroActions, #heroSocials, #heroScroll { opacity: 1 !important; }
+        </style>
+    </noscript>
 </head>
 
 <body>
@@ -64,7 +119,7 @@
     </div>
 
     <!-- ═══ NAVIGATION ═══ -->
-    <nav class="navbar" id="navbar">
+    <nav class="navbar" id="navbar" aria-label="Main navigation">
         <div class="nav-container" id="navLinks">
             <a href="#hero" class="dock-item nav-logo">
                 <span class="logo-text">MA</span>
@@ -164,7 +219,7 @@
             <div class="hero-right">
                 <div class="hero-portrait" id="heroPortrait">
                     <div class="portrait-frame">
-                        <video class="portrait-video" autoplay muted loop playsinline preload="metadata" aria-label="Muhammad Azeem hero animation">
+                        <video class="portrait-video" autoplay muted loop playsinline preload="auto" aria-label="Muhammad Azeem hero animation" poster="picture.jpeg">
                             <source src="hero-loop.webm" type="video/webm">
                         </video>
                     </div>
@@ -212,7 +267,7 @@
     </div>
 
     <!-- ═══ ABOUT ═══ -->
-    <section class="section about" id="about">
+    <section class="section about cv-auto" id="about">
         <div class="container">
             <div class="section-header">
                 <span class="section-index">01</span>
@@ -268,7 +323,7 @@
     </section>
 
     <!-- ═══ EXPERIENCE ═══ -->
-    <section class="section experience" id="experience">
+    <section class="section experience cv-auto" id="experience">
         <div class="container">
             <div class="section-header">
                 <span class="section-index">02</span>
@@ -325,7 +380,7 @@
     </section>
 
     <!-- ═══ SKILLS ═══ -->
-    <section class="section skills" id="skills">
+    <section class="section skills cv-auto" id="skills">
         <div class="container">
             <div class="section-header">
                 <span class="section-index">03</span>
@@ -417,7 +472,7 @@
     </section>
 
     <!-- ═══ PROJECTS ═══ -->
-    <section class="section projects" id="projects">
+    <section class="section projects cv-auto" id="projects">
         <div class="container">
             <div class="section-header">
                 <span class="section-index">04</span>
@@ -562,7 +617,7 @@
     </div>
 
     <!-- ═══ PUBLICATIONS ═══ -->
-    <section class="section publications" id="publications">
+    <section class="section publications cv-auto" id="publications">
         <div class="container">
             <div class="section-header">
                 <span class="section-index">05</span>
@@ -607,7 +662,7 @@
     </section>
 
     <!-- ═══ CREDENTIALS ═══ -->
-    <section class="section credentials" id="certifications">
+    <section class="section credentials cv-auto" id="certifications">
         <div class="container">
             <div class="credentials-split">
                 <div class="credentials-col">
@@ -693,7 +748,7 @@
     </section>
 
     <!-- ═══ CONTACT ═══ -->
-    <section class="section contact" id="contact">
+    <section class="section contact cv-auto" id="contact">
         <div class="container">
             <div class="section-header section-header-center">
                 <span class="section-index">08</span>
@@ -736,24 +791,28 @@
                         <a href="https://scholar.google.com/citations?user=FSMcx8YAAAAJ" target="_blank" rel="noopener" class="social-btn-lg"><i class="ph-duotone ph-graduation-cap"></i> Scholar</a>
                     </div>
                 </div>
-                <form class="contact-form gs-reveal" id="contactForm">
+                <form class="contact-form gs-reveal" id="contactForm" autocomplete="on">
+                    <!-- Honeypot — hidden from humans, catches bots -->
+                    <div style="position:absolute;left:-9999px;" aria-hidden="true">
+                        <input type="text" name="website" tabindex="-1" autocomplete="off">
+                    </div>
                     <div class="form-field">
-                        <input type="text" id="name" name="name" required placeholder=" ">
+                        <input type="text" id="name" name="name" required placeholder=" " autocomplete="name" minlength="2" maxlength="100">
                         <label for="name">Your Name</label>
                         <div class="field-line"></div>
                     </div>
                     <div class="form-field">
-                        <input type="email" id="email" name="email" required placeholder=" ">
+                        <input type="email" id="email" name="email" required placeholder=" " autocomplete="email">
                         <label for="email">Your Email</label>
                         <div class="field-line"></div>
                     </div>
                     <div class="form-field">
-                        <input type="text" id="subject" name="subject" required placeholder=" ">
+                        <input type="text" id="subject" name="subject" required placeholder=" " minlength="3" maxlength="200">
                         <label for="subject">Subject</label>
                         <div class="field-line"></div>
                     </div>
                     <div class="form-field">
-                        <textarea id="message" name="message" rows="5" required placeholder=" "></textarea>
+                        <textarea id="message" name="message" rows="5" required placeholder=" " minlength="10" maxlength="5000"></textarea>
                         <label for="message">Message</label>
                         <div class="field-line"></div>
                     </div>
@@ -790,7 +849,13 @@
         <i class="ph-bold ph-caret-up"></i>
     </button>
 
-    <script src="script.js"></script>
+    <!-- Deferred external scripts — non-blocking -->
+    <script src="https://unpkg.com/@phosphor-icons/web@2.1.1" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js" defer></script>
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js" defer></script>
+    <script src="script.js" defer></script>
 </body>
 
 </html>
