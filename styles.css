@@ -179,10 +179,10 @@ ul{list-style:none}
 /* ─── About ─── */
 .about-layout{display:grid;grid-template-columns:1.5fr 1fr;gap:80px;align-items:start}
 .about-lead{font-size:1.2rem;color:var(--text-primary);line-height:1.8;margin-bottom:24px}
-.about-lead em{color:var(--accent);font-style:normal;font-weight:600}
+.about-lead em{color:var(--text-primary);font-style:italic;font-weight:600}
 .about-content p{color:var(--text-secondary);font-size:.98rem;line-height:1.85;margin-bottom:18px}
-.about-content strong{color:var(--accent-warm);font-weight:600}
-.about-content em{color:var(--accent);font-style:italic}
+.about-content strong{color:var(--text-primary);font-weight:600}
+.about-content em{color:var(--text-primary);font-style:italic}
 .about-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .stat-block{background:var(--bg-card);border:1px solid var(--border-subtle);padding:32px 24px;transition:var(--transition);position:relative;overflow:hidden;transform-style:preserve-3d;perspective:600px}
 .stat-block:hover{border-color:var(--text-primary);background:var(--bg-card-hover)}
